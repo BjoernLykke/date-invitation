@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>En lille invitation ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 35px;
+      border-radius: 25px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+      width: 85%;
+      max-width: 420px;
+    }
+
+    h1 {
+      color: #d6336c;
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #444;
+    }
+
+    button {
+      border: none;
+      padding: 14px 24px;
+      border-radius: 999px;
+      font-size: 18px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.2s;
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    .no {
+      background: #eee;
+      color: #444;
+      position: relative;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .option {
+      display: block;
+      width: 90%;
+      margin: 12px auto;
+      background: #fff0f3;
+      color: #d6336c;
+    }
+
+    .calendar {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .date {
+        background: #fff0f3;
+        color: #d6336c;
+        font-size: 15px;
+        padding: 12px 8px;
+        margin: 0;
+    }
+
+    .roadtrip {
+        position: relative;
+        height: 180px;
+        margin: 25px 0;
+        background: linear-gradient(#bde0fe 0%, #bde0fe 55%, #95d5b2 55%, #95d5b2 100%);
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .sky {
+        position: absolute;
+        top: 18px;
+        right: 25px;
+        font-size: 35px;
+    }
+
+    .road {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 55px;
+        background: #555;
+    }
+
+    .car {
+        position: absolute;
+        bottom: 38px;
+        left: 5%;
+        font-size: 42px;
+        z-index: 2;
+        transition: left 0.08s linear;
+    }
+
+    .sign {
+        position: absolute;
+        right: 15px;
+        bottom: 70px;
+        background: white;
+        color: #d6336c;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-weight: bold;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .balloon-area {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin: 25px 0;
+    }
+
+    .balloon {
+        font-size: 55px;
+        background: transparent;
+        padding: 5px;
+        margin: 0;
+        transition: 0.2s;
+    }
+
+    .balloon:hover {
+        transform: scale(1.15);
+    }
+
+    .hint {
+        background: #fff0f3;
+        padding: 14px;
+        border-radius: 18px;
+        color: #d6336c;
+        font-size: 16px;
+    }
+
+    .scratch-card {
+        height: 230px;
+        border-radius: 22px;
+        background: white;
+        border: 3px dashed #ff8fab;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 25px;
+        cursor: pointer;
+        box-shadow: inset 0 0 25px rgba(0,0,0,0.12);
+    }
+
+    .scratch-cover {
+        background: #ccc;
+        color: white;
+        font-size: 24px;
+        padding: 45px 70px;
+        border-radius: 18px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="card" id="card">
+    <h1>Hej Karoline ❤️</h1>
+    <p>Jeg har et meget vigtigt spørgsmål...</p>
+    <button class="yes" onclick="nextStep()">Start</button>
+  </div>
+
+  <script>
+    let step = 0;
+
+    const card = document.getElementById("card");
+
+    function nextStep() {
+      step++;
+
+      if (step === 1) {
+        card.innerHTML = `
+          <h1>Har du lyst til at tage med mig på date? ❤️</h1>
+          <button class="yes" onclick="nextStep()">Ja 🥰</button>
+          <button class="no" id="noBtn">Nej 🥺</button>
+        `;
+
+        const noBtn = document.getElementById("noBtn");
+
+        noBtn.addEventListener("mouseover", moveNoButton);
+        noBtn.addEventListener("click", moveNoButton);
+      }
+
+      if (step === 2) {
+        card.innerHTML = `
+            <h1>Yesss 🥰</h1>
+            <p>Det vi skal, er en overraskelse...</p>
+            <p>Men bare rolig, det hele er allerede planlagt ❤️</p>
+            <p><strong>Hint:</strong> Det tager en hel dag, og der er en lang, hyggelig road trip involveret 🚗✨</p>
+            <button class="yes" onclick="nextStep()">Klar til at høre hvad vi skal? 🤩</button>
+        `;
+        }
+
+        if (step === 3) {
+            card.innerHTML = `
+                <h1>Først skal du vælge hvornår du har tid 🥺</h1>
+                <p>(Du skal bare vælge — vi kan altid vælge om ❤️)</p>
+
+                <div class="calendar">
+                <button class="date" onclick="nextStep()">Man 6. juli</button>
+                <button class="date" onclick="nextStep()">Tir 7. juli</button>
+                <button class="date" onclick="nextStep()">Ons 8. juli</button>
+                <button class="date" onclick="nextStep()">Tor 9. juli</button>
+                <button class="date" onclick="nextStep()">Fre 10. juli</button>
+                <button class="date" onclick="nextStep()">Lør 11. juli</button>
+                <button class="date" onclick="nextStep()">Søn 12. juli</button>
+
+                <button class="date" onclick="nextStep()">Man 13. juli</button>
+                <button class="date" onclick="nextStep()">Tir 14. juli</button>
+                <button class="date" onclick="nextStep()">Ons 15. juli</button>
+                <button class="date" onclick="nextStep()">Tor 16. juli</button>
+                <button class="date" onclick="nextStep()">Fre 17. juli</button>
+                <button class="date" onclick="nextStep()">Lør 18. juli</button>
+                <button class="date" onclick="nextStep()">Søn 19. juli</button>
+                </div>
+            `;
+        }
+
+        if (step === 4) {
+            showBalloonGame();
+        }
+    }
+
+    function showBalloonGame() {
+        const winningBalloon = 3;
+
+        card.innerHTML = `
+            <h1>Daten gemmer sig i en af ballonerne ❤️</h1>
+            <p>Spring dem for at finde daten 🤫</p>
+
+            <div class="balloon-area">
+            ${[1,2,3,4,5].map(n => `
+                <button class="balloon balloon${n}" onclick="popBalloon(${n}, ${winningBalloon})">🎈</button>
+            `).join("")}
+            </div>
+
+            <p class="hint">Hint: Det bliver en dag fyldt med grin, oplevelser og sommerstemning ☀️</p>
+        `;
+    }
+
+    function popBalloon(number, winningBalloon) {
+        const balloons = document.querySelectorAll(".balloon");
+
+        if (number === winningBalloon) {
+            balloons.forEach(b => b.disabled = true);
+            showScratchCard();
+        } else {
+            event.target.innerText = "💥";
+            event.target.disabled = true;
+        }
+    }
+
+    function showScratchCard() {
+        card.innerHTML = `
+            <h1>Du fandt den! 🥳</h1>
+            <p>Skrab for at afsløre overraskelsen... 💖</p>
+
+            <div class="scratch-card" onclick="revealDate()">
+            <div class="scratch-cover">Skrab her ✨</div>
+            </div>
+        `;
+    }
+
+    function moveNoButton() {
+        const noBtn = document.getElementById("noBtn");
+
+        const x = Math.random() * 500 - 250;
+        const y = Math.random() * 350 - 175;
+
+        noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function revealDate() {
+        card.innerHTML = `
+            <h1>🎢 DJURS SOMMERLAND 🎢</h1>
+            <p>Vi skal på roadtrip og bruge en hel dag sammen ❤️</p>
+            <p>Jeg har sørget for billetterne og transporten.</p>
+            <p>Jeg glæder mig virkelig meget 🥰</p>
+        `;
+    }
+  </script>
+</body>
+</html>
