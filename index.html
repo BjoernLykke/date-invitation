@@ -250,14 +250,14 @@
     }
 
     function showBalloonGame() {
-        const winningBalloon = 3;
+        const winningBalloon = 4;
 
         card.innerHTML = `
             <h1>Daten gemmer sig i en af ballonerne ❤️</h1>
             <p>Spring dem for at finde daten 🤫</p>
 
             <div class="balloon-area">
-            ${[1,2,3,4,5].map(n => `
+            ${[1,2,3,4,5,6].map(n => `
                 <button class="balloon balloon${n}" onclick="popBalloon(${n}, ${winningBalloon})">🎈</button>
             `).join("")}
             </div>
@@ -267,11 +267,8 @@
     }
 
     function popBalloon(number, winningBalloon) {
-        const balloons = document.querySelectorAll(".balloon");
-
         if (number === winningBalloon) {
-            balloons.forEach(b => b.disabled = true);
-            showScratchCard();
+            revealDate();
         } else {
             event.target.innerText = "💥";
             event.target.disabled = true;
